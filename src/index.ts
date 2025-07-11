@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { initDatabase, closeDatabase } from "./database/database";
 import todoRoutes from "./routes/todoRoutes";
 
 dotenv.config();
@@ -38,8 +39,32 @@ app.use(
   }
 );
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Initialize database and start server
+async function startServer() {
+  try {
+    await initDatabase();
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  }
+}
+
+// Graceful shutdown
+process.on("SIGINT", async () => {
+  console.log("\nShutting down gracefully...");
+  await closeDatabase();
+  process.exit(0);
 });
+
+process.on("SIGTERM", async () => {
+  console.log("\nShutting down gracefully...");
+  await closeDatabase();
+  process.exit(0);
+});
+
+startServer();
 
 export default app;

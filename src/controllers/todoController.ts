@@ -4,20 +4,21 @@ import { ToDoItem } from "../types";
 
 export class TodoController {
   // GET /api/todos
-  static getAllTodos = (req: Request, res: Response) => {
+  static getAllTodos = async (req: Request, res: Response) => {
     try {
-      const todos = TodoModel.getAll();
+      const todos = await TodoModel.getAll();
       res.json(todos);
     } catch (error) {
+      console.error("Error fetching todos:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   };
 
   // GET /api/todos/:id
-  static getTodoById = (req: Request, res: Response) => {
+  static getTodoById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const todo = TodoModel.getById(id);
+      const todo = await TodoModel.getById(id);
 
       if (!todo) {
         return res.status(404).json({ error: "Todo not found" });
@@ -25,12 +26,13 @@ export class TodoController {
 
       res.json(todo);
     } catch (error) {
+      console.error("Error fetching todo:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   };
 
   // POST /api/todos
-  static createTodo = (req: Request, res: Response) => {
+  static createTodo = async (req: Request, res: Response) => {
     try {
       const { title, description, isImportant } = req.body;
 
@@ -45,7 +47,7 @@ export class TodoController {
         return res.status(400).json({ error: "isImportant must be a boolean" });
       }
 
-      const newTodo = TodoModel.create({
+      const newTodo = await TodoModel.create({
         title,
         description,
         isImportant,
@@ -53,12 +55,13 @@ export class TodoController {
 
       res.status(201).json(newTodo);
     } catch (error) {
+      console.error("Error creating todo:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   };
 
   // PUT /api/todos/:id
-  static updateTodo = (req: Request, res: Response) => {
+  static updateTodo = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       const { title, description, isImportant } = req.body;
@@ -86,7 +89,7 @@ export class TodoController {
         updates.isImportant = isImportant;
       }
 
-      const updatedTodo = TodoModel.update(id, updates);
+      const updatedTodo = await TodoModel.update(id, updates);
 
       if (!updatedTodo) {
         return res.status(404).json({ error: "Todo not found" });
@@ -94,15 +97,16 @@ export class TodoController {
 
       res.json(updatedTodo);
     } catch (error) {
+      console.error("Error updating todo:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   };
 
   // DELETE /api/todos/:id
-  static deleteTodo = (req: Request, res: Response) => {
+  static deleteTodo = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const deleted = TodoModel.delete(id);
+      const deleted = await TodoModel.delete(id);
 
       if (!deleted) {
         return res.status(404).json({ error: "Todo not found" });
@@ -110,6 +114,7 @@ export class TodoController {
 
       res.status(204).send();
     } catch (error) {
+      console.error("Error deleting todo:", error);
       res.status(500).json({ error: "Internal server error" });
     }
   };
