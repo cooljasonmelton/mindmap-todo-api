@@ -1,5 +1,10 @@
 # mindmap-todo-api
 
+Research Error handling:
+Global error handling middleware
+Input validation (consider adding joi or express-validator)
+Proper HTTP status codes
+
 NEXT:
 
 - add DB: sqlite3 or PostgreSQL
@@ -12,3 +17,8 @@ NEXT:
 AI Features
 
 - am i doing any ai stuff in here?
+
+TODO LATER:
+
+- save env example to github
+- documentation
