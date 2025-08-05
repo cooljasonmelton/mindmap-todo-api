@@ -1,24 +1,39 @@
 # mindmap-todo-api
 
-Research Error handling:
-Global error handling middleware
-Input validation (consider adding joi or express-validator)
-Proper HTTP status codes
+A Node.js, RESTful CRUD api for [mindmap-todo-frontend](https://github.com/cooljasonmelton/mindmap-todo-frontend)
 
-NEXT:
+## MODEL
 
-- add DB: sqlite3 or PostgreSQL
-- create models: Todo, Tag?, User?
-- set up REST routes
-- set up controllers
+```typescript
+type ToDoItem = {
+  id: string;
+  title: string;
+  description?: string;
+  isImportant: boolean;
+};
+```
+
+## LOCAL SET UP
+
+1. clone repo
+2. When running with [mindmap-todo-frontend](https://github.com/cooljasonmelton/mindmap-todo-frontend) To not create an .env file in the root and add the following
+
+```
+PORT=8000
+```
+
+3. to run locally:
+
+```
+npm run dev
+```
+
+## TODO LATER:
+
 - error handling & validation
-- ? testing
-
-AI Features
-
-- am i doing any ai stuff in here?
-
-TODO LATER:
-
-- save env example to github
-- documentation
+  - Research Error handling:
+  - Global error handling middleware
+  - Input validation (consider adding joi or express-validator)
+  - Proper HTTP status codes
+- testing
+- complete documentation
