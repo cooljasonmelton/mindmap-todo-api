@@ -1,6 +1,14 @@
 # mindmap-todo-api
 
-A Node.js, RESTful CRUD api for [mindmap-todo-frontend](https://github.com/cooljasonmelton/mindmap-todo-frontend)
+A simple backend for [mindmap-todo-frontend](https://github.com/cooljasonmelton/mindmap-todo-frontend)
+
+## BUILT WITH
+
+- Node.js
+- Express
+- RESTful routes
+- CRUD operations
+- SQLite database
 
 ## MODEL
 
@@ -12,6 +20,16 @@ type ToDoItem = {
   isImportant: boolean;
 };
 ```
+
+## ROUTES
+
+|                      |                                     |
+| -------------------- | ----------------------------------- |
+| POST (create)        | http://localhost:8000/api/todos     |
+| GET (read all)       | http://localhost:8000/api/todos     |
+| GET (read by id)     | http://localhost:8000/api/todos/:id |
+| PUT (update todo)    | http://localhost:8000/api/todos/:id |
+| DELETE (delete todo) | http://localhost:8000/api/todos/:id |
 
 ## LOCAL SET UP
 
@@ -27,6 +45,17 @@ PORT=8000
 ```
 npm run dev
 ```
+
+<hr/>
+
+Created by
+<a href='https://github.com/cooljasonmelton'> Jason Melton</a>
+
+<hr/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 ## TODO LATER:
 
